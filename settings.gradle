@@ -1,5 +1,12 @@
-import java.nio.file.Paths
-import java.nio.file.Path
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        maven { url "https://www.jetbrains.com/intellij-repository/releases" }
+        maven { url "https://www.jetbrains.com/intellij-repository/snapshots" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
 
 rootProject.name = 'org.apollo'
 include ':cache'
@@ -9,6 +16,9 @@ include ':game:plugin-detekt-rules'
 include ':game:plugin-testing'
 include ':net'
 include ':util'
+
+import java.nio.file.Paths
+import java.nio.file.Path
 
 def pluginDirs = [
     rootProject.projectDir.toPath().resolve("game/plugin"),
@@ -36,4 +46,3 @@ def processPluginDir(Path pluginDir) {
 }
 
 pluginDirs.each { processPluginDir(it) }
-

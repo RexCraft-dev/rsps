@@ -1,9 +1,17 @@
 apply plugin: 'org.jetbrains.kotlin.jvm'
 apply plugin: 'java'
+
 description = 'Helpers and API for common plugin usecases'
 
 test {
     useJUnitPlatform()
+
+    // ✅ Grant all reflective access for Powermock / legacy tests on Java 11+
+    jvmArgs '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.lang.reflect=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.io=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.net=ALL-UNNAMED'
 }
 
 dependencies {
@@ -12,5 +20,19 @@ dependencies {
     implementation project(':net')
     implementation project(':util')
 
+    testImplementation project(':game')
+    testImplementation project(':cache')
+    testImplementation project(':net')
+    testImplementation project(':util')
     testImplementation project(':game:plugin-testing')
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junitPlatformVersion}"
+
+    testImplementation "io.mockk:mockk:${mockkVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "com.willowtreeapps.assertk:assertk:${assertkVersion}"
+    testImplementation "org.powermock:powermock-module-junit4:${powermockVersion}"
 }
+

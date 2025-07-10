@@ -6,15 +6,15 @@ description = 'Apollo Game'
 mainClassName = 'org.apollo.Server'
 
 dependencies {
-    compile project(':cache')
-    compile project(':net')
-    compile project(':util')
+    implementation project(':cache')
+    implementation project(':net')
+    implementation project(':util')
 
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-common'
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-script-runtime'
-    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: kotlinxCoroutinesVersion
-    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: kotlinxCoroutinesVersion
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-scripting-common'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-script-runtime'
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: kotlinxCoroutinesVersion
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: kotlinxCoroutinesVersion
 
     implementation group: 'com.google.guava', name: 'guava', version: guavaVersion
     implementation group: 'io.github.classgraph', name: 'classgraph', version: classGraphVersion
@@ -32,8 +32,8 @@ dependencies {
     testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
 
     project(":game:plugin").subprojects { pluginProject ->
-         if (pluginProject.buildFile.exists()) {
-            runtimeClasspath pluginProject
+        if (pluginProject.buildFile.exists()) {
+            runtimeOnly pluginProject
         }
     }
 }

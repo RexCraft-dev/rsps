@@ -7,6 +7,7 @@ dependencies {
 
     api project(':game')
     api project(':net')
+    implementation project(':util') // ✅ FIX: Add util dependency
 
     // JUnit Jupiter API and TestEngine implementation
     api("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
@@ -23,6 +24,6 @@ dependencies {
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
